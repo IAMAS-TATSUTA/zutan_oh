@@ -1,0 +1,402 @@
+/* -------------------------
+   Base
+------------------------- */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+  font-family: system-ui, sans-serif;
+  background: #f4efe5;
+  color: #222;
+  user-select: none;
+}
+
+/* -------------------------
+   Reader color variables
+------------------------- */
+
+.reader-1 {
+  --reader-color: #d96c5f;
+  --reader-color-soft: #f1c4bd;
+}
+
+.reader-2 {
+  --reader-color: #5f8fd9;
+  --reader-color-soft: #bfd3f1;
+}
+
+.reader-3 {
+  --reader-color: #75a867;
+  --reader-color-soft: #c9e3c2;
+}
+
+.reader-4 {
+  --reader-color: #c59a4a;
+  --reader-color-soft: #ead8ad;
+}
+
+/* -------------------------
+   Desktop / wide layout
+------------------------- */
+
+.app {
+  width: min(1180px, 100vw);
+  height: 100dvh;
+  margin: 0 auto;
+  padding: clamp(24px, 5vw, 64px);
+
+  display: grid;
+  grid-template-columns: minmax(340px, 520px) minmax(280px, 420px);
+  gap: clamp(20px, 4vw, 48px);
+
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+/* -------------------------
+   Tablet
+------------------------- */
+
+.tablet {
+  width: 100%;
+  max-width: 520px;
+  height: min(620px, calc(100dvh - 96px));
+
+  margin: 0;
+  padding: 14px;
+
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 64px;
+  gap: 12px;
+
+  background: #e8e1d4;
+  border: 4px solid #b8aa95;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+
+  overflow: hidden;
+}
+
+.reader-grid {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.reader {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+  background: var(--reader-color-soft);
+  border: 3px solid var(--reader-color);
+
+  box-shadow:
+    inset 0 0 0 4px rgba(255, 255, 255, 0.28),
+    inset 0 -8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.reader.active {
+  outline: 5px solid rgba(0, 0, 0, 0.2);
+  outline: 5px solid color-mix(in srgb, var(--reader-color) 45%, transparent);
+}
+
+/* -------------------------
+   Knobs
+------------------------- */
+
+.knob-row {
+  width: 100%;
+  height: 64px;
+  padding-top: 8px;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 10px;
+
+  border-top: 2px solid rgba(0, 0, 0, 0.12);
+}
+
+.knob-wrap {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.knob {
+  width: 54px;
+  height: 54px;
+
+  position: relative;
+
+  border-radius: 50%;
+  background: var(--reader-color-soft);
+  border: 3px solid var(--reader-color);
+
+  cursor: grab;
+  touch-action: none;
+
+  box-shadow:
+    inset 0 2px 5px rgba(255, 255, 255, 0.5),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.18),
+    0 4px 8px rgba(0, 0, 0, 0.18);
+}
+
+.knob:active {
+  cursor: grabbing;
+}
+
+.knob-indicator {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+
+  width: 4px;
+  height: 18px;
+
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.75);
+
+  transform: translateX(-50%);
+  transform-origin: 50% 19px;
+}
+
+/* -------------------------
+   Card tray
+------------------------- */
+
+.card-tray {
+  width: 100%;
+  max-width: 420px;
+  height: min(620px, calc(100dvh - 96px));
+
+  padding: 14px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+  grid-auto-rows: 94px;
+  gap: 10px;
+
+  border-radius: 18px;
+  background: #fff8ec;
+  border: 2px solid #d8cbb8;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+}
+
+/* -------------------------
+   Cards
+------------------------- */
+
+.card {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 94px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  border-radius: 12px;
+  border: 3px solid rgba(0, 0, 0, 0.18);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.18);
+
+  font-weight: 800;
+  cursor: grab;
+  touch-action: none;
+}
+
+.card.dragging {
+  position: fixed;
+  z-index: 999;
+  cursor: grabbing;
+}
+
+.card.in-reader {
+  position: absolute;
+  left: 15%;
+  top: 15%;
+
+  width: 70%;
+  height: 70%;
+  max-height: none;
+}
+
+.card-emoji {
+  font-size: 30px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.card-name {
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: rgba(0, 0, 0, 0.65);
+  pointer-events: none;
+}
+
+/* -------------------------
+   Mobile layout
+------------------------- */
+
+@media (max-width: 760px) {
+  :root {
+    --mobile-pad: 12px;
+    --mobile-gap: 12px;
+    --mobile-tablet-height: 48dvh;
+  }
+
+  body {
+    position: fixed;
+    inset: 0;
+  }
+
+  .app {
+    width: 100vw;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+
+    display: block;
+    overflow: hidden;
+  }
+
+  .tablet {
+    position: fixed;
+    left: var(--mobile-pad);
+    right: var(--mobile-pad);
+    top: calc(var(--mobile-pad) + env(safe-area-inset-top));
+
+    width: auto;
+    max-width: none;
+    height: var(--mobile-tablet-height);
+    max-height: none;
+
+    padding: 8px;
+
+    grid-template-rows: minmax(0, 1fr) 50px;
+    gap: 8px;
+
+    z-index: 10;
+  }
+
+  .reader-grid {
+    gap: 6px;
+  }
+
+  .reader {
+    border-width: 2px;
+    border-radius: 10px;
+  }
+
+  .reader.active {
+    outline: 3px solid rgba(0, 0, 0, 0.2);
+    outline: 3px solid color-mix(in srgb, var(--reader-color) 45%, transparent);
+  }
+
+  .knob-row {
+    height: 50px;
+    margin: 0;
+    padding: 5px 4px 0;
+    gap: 6px;
+  }
+
+  .knob {
+    width: 34px;
+    height: 34px;
+    border-width: 2px;
+  }
+
+  .knob-indicator {
+    top: 5px;
+    height: 12px;
+    transform-origin: 50% 13px;
+  }
+
+  .card-tray {
+    position: fixed;
+    left: var(--mobile-pad);
+    right: var(--mobile-pad);
+    top: calc(
+      var(--mobile-pad) +
+      env(safe-area-inset-top) +
+      var(--mobile-tablet-height) +
+      var(--mobile-gap)
+    );
+    bottom: calc(var(--mobile-pad) + env(safe-area-inset-bottom));
+
+    width: auto;
+    max-width: none;
+    height: auto;
+    max-height: none;
+
+    padding: 8px;
+
+    grid-template-columns: repeat(auto-fill, minmax(62px, 1fr));
+    grid-auto-rows: 76px;
+    gap: 7px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .card {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+
+    border-width: 2px;
+    border-radius: 9px;
+    gap: 2px;
+  }
+
+  .card.in-reader {
+    left: 18%;
+    top: 18%;
+
+    width: 64%;
+    height: 64%;
+  }
+
+  .card-emoji {
+    font-size: 24px;
+  }
+
+  .card-name {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+}

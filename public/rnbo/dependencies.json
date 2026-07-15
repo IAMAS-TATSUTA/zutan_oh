@@ -1,0 +1,82 @@
+[
+  {
+    "id": "wind",
+    "file": "media/zutan_wind.mp3"
+  },
+  {
+    "id": "cat",
+    "file": "media/cat.mp3"
+  },
+  {
+    "id": "pig",
+    "file": "media/zutan_pig.mp3"
+  },
+  {
+    "id": "electricity",
+    "file": "media/zutan_electricity.mp3"
+  },
+  {
+    "id": "waterfall",
+    "file": "media/zutan_waterfall.mp3"
+  },
+  {
+    "id": "water",
+    "file": "media/zutan_water.mp3"
+  },
+  {
+    "id": "forest",
+    "file": "media/zutan_forest.mp3"
+  },
+  {
+    "id": "train",
+    "file": "media/zutan_train.mp3"
+  },
+  {
+    "id": "bike",
+    "file": "media/zutan_bike.mp3"
+  },
+  {
+    "id": "dog",
+    "file": "media/zutan_dog.mp3"
+  },
+  {
+    "id": "rooster",
+    "file": "media/zutan_rooster.mp3"
+  },
+  {
+    "id": "fire",
+    "file": "media/zutan_fire.mp3"
+  },
+  {
+    "id": "station",
+    "file": "media/zutan_station.mp3"
+  },
+  {
+    "id": "rain",
+    "file": "media/zutan_rain.mp3"
+  },
+  {
+    "id": "bottle",
+    "file": "media/zutan_bottle.mp3"
+  },
+  {
+    "id": "frogs",
+    "file": "media/zutan_frogs.mp3"
+  },
+  {
+    "id": "cowbell",
+    "file": "media/zutan_cowbell.mp3"
+  },
+  {
+    "id": "chips",
+    "file": "media/zutan_chips.mp3"
+  },
+  {
+    "id": "beach",
+    "file": "media/zutan_beach.mp3"
+  },
+  {
+    "id": "ac",
+    "file": "media/zutan_ac.mp3"
+  }
+]
