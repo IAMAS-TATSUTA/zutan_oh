@@ -142,26 +142,26 @@ function setRNBOReaderVolume(readerNumber, value) {
 }
 
 const soundCards = [
-  { id: 0, name: "エアコン", emoji: "❄️" },
-  { id: 1, name: "海辺", emoji: "🏖️" },
-  { id: 2, name: "チップス", emoji: "🥔" },
-  { id: 3, name: "カウベル", emoji: "🔔" },
-  { id: 4, name: "カエル", emoji: "🐸" },
-  { id: 5, name: "ボトル", emoji: "🍾" },
-  { id: 6, name: "雨", emoji: "🌧️" },
-  { id: 7, name: "駅", emoji: "🚉" },
-  { id: 8, name: "火", emoji: "🔥" },
-  { id: 9, name: "ニワトリ", emoji: "🐓" },
-  { id: 10, name: "犬", emoji: "🐕" },
-  { id: 11, name: "自転車", emoji: "🚲" },
-  { id: 12, name: "電車", emoji: "🚆" },
-  { id: 13, name: "森", emoji: "🌲" },
-  { id: 14, name: "水", emoji: "💧" },
-  { id: 15, name: "滝", emoji: "🏞️" },
-  { id: 16, name: "電気", emoji: "⚡" },
-  { id: 17, name: "ブタ", emoji: "🐖" },
-  { id: 18, name: "猫", emoji: "🐈" },
-  { id: 19, name: "風", emoji: "🌬️" }
+  { id: 0, name: "ac", image: "/card_illustrations/ac.png" },
+  { id: 1, name: "beach", image: "/card_illustrations/beach.png" },
+  { id: 2, name: "chips", image: "/card_illustrations/chips.png" },
+  { id: 3, name: "cowbell", image: "/card_illustrations/cowbell.png" },
+  { id: 4, name: "frogs", image: "/card_illustrations/frogs.png" },
+  { id: 5, name: "bottle", image: "/card_illustrations/bottle.png" },
+  { id: 6, name: "rain", image: "/card_illustrations/rain.png" },
+  { id: 7, name: "station", image: "/card_illustrations/station.png" },
+  { id: 8, name: "fire", image: "/card_illustrations/fire.png" },
+  { id: 9, name: "rooster", image: "/card_illustrations/rooster.png" },
+  { id: 10, name: "dog", image: "/card_illustrations/dog.png" },
+  { id: 11, name: "bike", image: "/card_illustrations/bike.png" },
+  { id: 12, name: "train", image: "/card_illustrations/train.png" },
+  { id: 13, name: "forest", image: "/card_illustrations/forest.png" },
+  { id: 14, name: "water", image: "/card_illustrations/water.png" },
+  { id: 15, name: "waterfall", image: "/card_illustrations/waterfall.png" },
+  { id: 16, name: "electricity", image: "/card_illustrations/electricity.png" },
+  { id: 17, name: "pig", image: "/card_illustrations/pig.png" },
+  { id: 18, name: "cat", image: "/card_illustrations/cat.png" },
+  { id: 19, name: "wind", image: "/card_illustrations/wind.png" }
 ];
 
 function createCards() {
@@ -172,15 +172,17 @@ function createCards() {
     const card = document.createElement("div");
     card.className = "card";
 
-    // This is the number sent to RNBO.
+    // This number gets sent to RNBO.
     card.dataset.sampleId = sound.id;
+    card.dataset.soundName = sound.name;
 
-    card.innerHTML = `
-      <div class="card-emoji">${sound.emoji}</div>
-      <div class="card-name">${sound.name}</div>
-    `;
+    const img = document.createElement("img");
+    img.className = "card-image";
+    img.src = sound.image;
+    img.alt = sound.name;
+    img.draggable = false;
 
-    card.style.background = cardColor(index);
+    card.appendChild(img);
 
     tray.appendChild(card);
     makeDraggable(card);

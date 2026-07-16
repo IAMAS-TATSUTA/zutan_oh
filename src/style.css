@@ -2,6 +2,19 @@
    Base
 ------------------------- */
 
+:root {
+  --zutan-orange: #f8a860;
+  --zutan-teal: #50a098;
+  --zutan-blue: #4860a0;
+  --zutan-red: #d85850;
+  --zutan-cream: #f0e8d8;
+  --zutan-card-white: #fff8ec;
+
+  --zutan-ink: #34424a;
+  --zutan-ink-soft: rgba(52, 66, 74, 0.45);
+  --zutan-shadow: rgba(52, 66, 74, 0.16);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -17,37 +30,37 @@ body {
 body {
   position: relative;
   font-family: system-ui, sans-serif;
-  background: #f4efe5;
+  background: var(--zutan-card-white);
   color: #222;
   user-select: none;
 }
 
 /* -------------------------
-   Reader color variables
+   Reader / knob colors
 ------------------------- */
 
 .reader-1 {
-  --reader-color: #d96c5f;
-  --reader-color-soft: #f1c4bd;
+  --reader-color: var(--zutan-orange);
+  --reader-color-soft: var(--zutan-orange);
 }
 
 .reader-2 {
-  --reader-color: #5f8fd9;
-  --reader-color-soft: #bfd3f1;
+  --reader-color: var(--zutan-teal);
+  --reader-color-soft: var(--zutan-teal);
 }
 
 .reader-3 {
-  --reader-color: #75a867;
-  --reader-color-soft: #c9e3c2;
+  --reader-color: var(--zutan-blue);
+  --reader-color-soft: var(--zutan-blue);
 }
 
 .reader-4 {
-  --reader-color: #c59a4a;
-  --reader-color-soft: #ead8ad;
+  --reader-color: var(--zutan-red);
+  --reader-color-soft: var(--zutan-red);
 }
 
 /* -------------------------
-   Desktop / wide layout
+   Desktop layout
 ------------------------- */
 
 .app {
@@ -82,10 +95,10 @@ body {
   grid-template-rows: minmax(0, 1fr) 64px;
   gap: 12px;
 
-  background: #e8e1d4;
-  border: 4px solid #b8aa95;
+  background: #eadfca;
   border-radius: 18px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  border: 2px solid var(--zutan-ink-soft);
+  box-shadow: 0 10px 24px rgba(52, 66, 74, 0.12);
 
   overflow: hidden;
 }
@@ -109,16 +122,20 @@ body {
 
   border-radius: 14px;
   background: var(--reader-color-soft);
-  border: 3px solid var(--reader-color);
+  border: 2px solid var(--zutan-ink-soft);
 
   box-shadow:
-    inset 0 0 0 4px rgba(255, 255, 255, 0.28),
-    inset 0 -8px 18px rgba(0, 0, 0, 0.08);
+    inset 0 0 0 2px rgba(255, 255, 255, 0.12),
+    0 3px 0 var(--zutan-shadow);
 }
 
 .reader.active {
-  outline: 5px solid rgba(0, 0, 0, 0.2);
-  outline: 5px solid color-mix(in srgb, var(--reader-color) 45%, transparent);
+  outline: none;
+
+  box-shadow:
+    inset 0 0 0 4px rgba(255, 248, 236, 0.75),
+    inset 0 0 0 6px rgba(52, 66, 74, 0.5),
+    0 3px 0 var(--zutan-shadow);
 }
 
 /* -------------------------
@@ -155,15 +172,14 @@ body {
 
   border-radius: 50%;
   background: var(--reader-color-soft);
-  border: 3px solid var(--reader-color);
+  border: 2px solid var(--zutan-ink-soft);
 
   cursor: grab;
   touch-action: none;
 
   box-shadow:
-    inset 0 2px 5px rgba(255, 255, 255, 0.5),
-    inset 0 -4px 8px rgba(0, 0, 0, 0.18),
-    0 4px 8px rgba(0, 0, 0, 0.18);
+    inset 0 -3px 0 rgba(52, 66, 74, 0.14),
+    0 3px 0 rgba(52, 66, 74, 0.14);
 }
 
 .knob:active {
@@ -175,18 +191,19 @@ body {
   left: 50%;
   top: 8px;
 
-  width: 4px;
-  height: 18px;
+  width: 3px;
+  height: 17px;
 
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(52, 66, 74, 0.7);
 
   transform: translateX(-50%);
   transform-origin: 50% 19px;
 }
 
 /* -------------------------
-   Card tray
+   Card area
+   No visible tray box.
 ------------------------- */
 
 .card-tray {
@@ -194,20 +211,47 @@ body {
   max-width: 420px;
   height: min(620px, calc(100dvh - 96px));
 
-  padding: 14px;
+  padding: 8px;
+  padding-right: 16px;
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
   grid-auto-rows: 94px;
   gap: 10px;
 
-  border-radius: 18px;
-  background: #fff8ec;
-  border: 2px solid #d8cbb8;
+  background: transparent;
+  border: none;
+  border-radius: 0;
 
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+/* Themed scrollbar */
+
+.card-tray {
+  scrollbar-width: thin;
+  scrollbar-color: var(--zutan-teal) transparent;
+}
+
+.card-tray::-webkit-scrollbar {
+  width: 10px;
+}
+
+.card-tray::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card-tray::-webkit-scrollbar-thumb {
+  background: var(--zutan-teal);
+  border-radius: 999px;
+  border: 2px solid var(--zutan-card-white);
+}
+
+.card-tray::-webkit-scrollbar-thumb:hover {
+  background: var(--zutan-blue);
 }
 
 /* -------------------------
@@ -220,18 +264,23 @@ body {
   max-height: 94px;
 
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
 
-  border-radius: 12px;
-  border: 3px solid rgba(0, 0, 0, 0.18);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.18);
+  background: transparent;
+  border: none;
+  box-shadow: none;
 
-  font-weight: 800;
   cursor: grab;
   touch-action: none;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
 }
 
 .card.dragging {
@@ -248,21 +297,6 @@ body {
   width: 70%;
   height: 70%;
   max-height: none;
-}
-
-.card-emoji {
-  font-size: 30px;
-  line-height: 1;
-  pointer-events: none;
-}
-
-.card-name {
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: 0.02em;
-  color: rgba(0, 0, 0, 0.65);
-  pointer-events: none;
 }
 
 /* -------------------------
@@ -315,13 +349,17 @@ body {
   }
 
   .reader {
-    border-width: 2px;
+    border-width: 1.5px;
     border-radius: 10px;
   }
 
   .reader.active {
-    outline: 3px solid rgba(0, 0, 0, 0.2);
-    outline: 3px solid color-mix(in srgb, var(--reader-color) 45%, transparent);
+    outline: none;
+
+    box-shadow:
+      inset 0 0 0 3px rgba(255, 248, 236, 0.75),
+      inset 0 0 0 5px rgba(52, 66, 74, 0.5),
+      0 3px 0 var(--zutan-shadow);
   }
 
   .knob-row {
@@ -334,7 +372,7 @@ body {
   .knob {
     width: 34px;
     height: 34px;
-    border-width: 2px;
+    border-width: 1.5px;
   }
 
   .knob-indicator {
@@ -360,7 +398,8 @@ body {
     height: auto;
     max-height: none;
 
-    padding: 8px;
+    padding: 4px;
+    padding-right: 12px;
 
     grid-template-columns: repeat(auto-fill, minmax(62px, 1fr));
     grid-auto-rows: 76px;
@@ -368,8 +407,15 @@ body {
 
     overflow-y: auto;
     overflow-x: hidden;
-    overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .card-tray::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .card-tray::-webkit-scrollbar-thumb {
+    border-width: 1px;
   }
 
   .card {
@@ -377,10 +423,6 @@ body {
     height: 100%;
     max-width: none;
     max-height: none;
-
-    border-width: 2px;
-    border-radius: 9px;
-    gap: 2px;
   }
 
   .card.in-reader {
@@ -391,12 +433,8 @@ body {
     height: 64%;
   }
 
-  .card-emoji {
-    font-size: 24px;
-  }
-
-  .card-name {
-    font-size: 8px;
-    letter-spacing: 0;
+  .card-image {
+    width: 88%;
+    height: 88%;
   }
 }
